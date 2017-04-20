@@ -1,5 +1,6 @@
 package main.controllers;
 
+import main.model.entity.Student;
 import main.model.entity.User;
 import main.services.StudentService;
 import main.services.StudentServiceImpl;
@@ -29,22 +30,20 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String login = req.getParameter("login");
-//        String passwor = req.getParameter("password");
-//
-//        User user = null;
-//        if ((user = userService.auth(login, passwor)) != null){
-//            req.getSession().setAttribute("login", login);
-//            LOGGER.debug("login: " + login);
-//            resp.sendRedirect(req.getContextPath() + "/listStudents");
-//        }
-//
-////        if (("user".equals(login)) && ("password".equals(passwor)))
-////        if (("user".equals(login)) && ("password".equals(passwor)))
-////            resp.sendRedirect(req.getContextPath() + "/listStudents");
-////        else
-////            resp.sendRedirect(req.getContextPath() + "/error");
-        System.out.println("test");
+
+        try {
+            String name = req.getParameter("name");
+            int age = Integer.parseInt(req.getParameter("age"));
+            long group_id = Long.parseLong(req.getParameter("group_id"));
+
+            Student student = new Student();
+            student.setName(name);
+            student.setAge(age);
+            student.setGroupId(group_id);
+            studentService.insert(student);
+        }catch (Exception e){
+            LOGGER.error(e);
+        }
         resp.sendRedirect(req.getContextPath() + "/listStudents");
     }
 

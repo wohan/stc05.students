@@ -14,9 +14,9 @@ public class AppStartListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         PropertyConfigurator.configure(LoginServlet.class.getClassLoader().getResource("log4j.properties"));
-        String email = servletContextEvent.getServletContext().getInitParameter("ADMIN_EMAIL");
-        System.out.println(email);
-        MailUtil.send(email, "Старт приложения");
+//        String email = servletContextEvent.getServletContext().getInitParameter("ADMIN_EMAIL");
+//        System.out.println(email);
+//        MailUtil.send(email, "Старт приложения");
     }
 
     @Override

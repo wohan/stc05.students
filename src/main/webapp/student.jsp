@@ -11,7 +11,7 @@
     <title>Student</title>
 </head>
 <body>
-<form method="post" action="/students/student/">
+<form method="post">
     <input type="text" name="name" />
     <input type="text" name="age" />
     <input type="text" name="group_id" />

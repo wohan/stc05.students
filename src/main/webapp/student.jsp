@@ -8,13 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Student</title>
 </head>
 <body>
-<form method="post" action="/students/">
-    <input type="text" name="login" />
-    <input type="text" name="password" />
-    <input type="submit" value="login" />
+<form method="post" action="/students/student/">
+    <input type="text" name="name" />
+    <input type="text" name="age" />
+    <input type="text" name="group_id" />
+    <input type="submit" value="Save" />
 </form>
 
 </body>

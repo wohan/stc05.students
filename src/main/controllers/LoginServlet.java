@@ -17,9 +17,7 @@ import java.io.IOException;
  */
 public class LoginServlet extends HttpServlet {
 
-    static {
-        PropertyConfigurator.configure(LoginServlet.class.getClassLoader().getResource("log4j.properties"));
-    }
+
 
     private static UserService userService = new UserServiceImpl();
     private static final Logger LOGGER = Logger.getLogger(LoginServlet.class);

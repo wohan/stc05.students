@@ -20,6 +20,11 @@
     <servlet-class>main.controllers.ListServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>StudentServlet</servlet-name>
+    <servlet-class>main.controllers.StudentServlet</servlet-class>
+  </servlet>
+
   <filter>
     <filter-name>WhiteFilter</filter-name>
     <filter-class>main.controllers.filters.WhileList</filter-class>
@@ -41,4 +46,22 @@
     <servlet-name>ListServlet</servlet-name>
     <url-pattern>/listStudents</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <url-pattern>/student</url-pattern>
+  </servlet-mapping>
+
+  <listener>
+  <listener-class>main.controllers.listeners.AppStartListener</listener-class>
+</listener>
+
+  <listener>
+    <listener-class>main.controllers.listeners.MySessionListener</listener-class>
+  </listener>
+
+  <context-param>
+    <param-name>ADMIN_EMAIL</param-name>
+    <param-value>innostc@gmail.com</param-value>
+  </context-param>
+
 </web-app>

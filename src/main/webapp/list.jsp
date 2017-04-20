@@ -5,18 +5,22 @@
     <title>List</title>
 </head>
 <body>
-    <% String message = (String) request.getAttribute("name"); %>
-   <%= message %>
 
-    <table>
-    <c:forEach items="${requestScope.list}" var="student">
-        <tr>
-            <td><c:out value="${student.id}"></c:out></td>
-            <td><c:out value="${student.name}"></c:out></td>
-            <td><c:out value="${student.age}"></c:out></td>
-            <td><c:out value="${student.groupId}"></c:out></td>
-        </tr>
-    </c:forEach>
-    </table>
+    <form method="get">
+        <td><input type="button" value="Добавить" onclick="location.href = '<%= request.getContextPath() %>/student'"></td>
+
+        <table>
+        <c:forEach items="${requestScope.list}" var="student">
+            <tr>
+                <td><c:out value="${student.id}"></c:out></td>
+                <td><c:out value="${student.name}"></c:out></td>
+                <td><c:out value="${student.age}"></c:out></td>
+                <td><c:out value="${student.groupId}"></c:out></td>
+                <td><input type="button" value="Редактировать" onclick="location.href = '<%= request.getContextPath() %>/student?id=<c:out value="${student.id}" />'"></td>
+                <td><input type="button" name="edit" value="Удалить" onclick="location.href = '?delete=<c:out value="${student.id}" />'"></td>
+            </tr>
+        </c:forEach>
+        </table>
+    </form>
 </body>
 </html>

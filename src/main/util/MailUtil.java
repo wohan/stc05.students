@@ -16,8 +16,23 @@ public class MailUtil {
 
     public static void send(String email, String msg){
 
+        /*
+        mail.host=smtp.gmail.com
+mail.username=//your gmail
+mail.password=//your password
+mail.defaultEncoding=UTF-8
+mail.smtp.auth=true
+mail.smtp.starttls.required=true
+mail.smtp.starttls.enable=true
+mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+mail.smtp.socketFactory.fallback=false
+mail.smtp.port=465
+mail.smtp.socketFactory.port=465
+         */
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.host", "smtp.gmail.com");
+            props.put("mail.defaultEncoding", "UTF-8");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class",
                     "javax.net.ssl.SSLSocketFactory");

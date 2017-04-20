@@ -10,6 +10,14 @@ public class Student {
     private Long groupId;
     private Group group;
 
+    public Student(){}
+
+    public Student(String name, int age, Long groupId) {
+        this.name = name;
+        this.age = age;
+        this.groupId = groupId;
+    }
+
     public long getId() {
         return id;
     }

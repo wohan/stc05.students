@@ -59,6 +59,10 @@
     <listener-class>main.controllers.listeners.MySessionListener</listener-class>
   </listener>
 
+  <listener>
+    <listener-class>main.controllers.listeners.MyRequestListener</listener-class>
+  </listener>
+
   <context-param>
     <param-name>ADMIN_EMAIL</param-name>
     <param-value>innostc@gmail.com</param-value>

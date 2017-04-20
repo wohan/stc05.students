@@ -12,9 +12,10 @@
 </head>
 <body>
 <form method="post">
-    <input type="text" name="name" />
-    <input type="text" name="age" />
-    <input type="text" name="group_id" />
+    <input type="text" name="name" value="<%= request.getAttribute("name")%>" />
+    <input type="text" name="age" value="<%= request.getAttribute("age")%>"/>
+    <input type="text" name="group_id" value="<%= request.getAttribute("group_id")%>"/>
+    <input type="hidden" name="student_id" value="<%= request.getAttribute("id") %>">
     <input type="submit" value="Save" />
 </form>
 

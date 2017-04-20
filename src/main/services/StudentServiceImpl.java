@@ -30,4 +30,9 @@ public class StudentServiceImpl implements StudentService{
     public void update(Student student) {
         studentDao.update(student);
     }
+
+    @Override
+    public Student findById(int id) {
+        return studentDao.findById(id);
+    }
 }

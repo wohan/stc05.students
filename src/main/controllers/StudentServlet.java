@@ -25,6 +25,23 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String studentId = req.getParameter("id");
+        String name = "", age = "", group_id = "";
+
+        if ((studentId != null) && (studentId.matches("\\d+"))) {
+            req.setAttribute("id", studentId);
+            Student student = studentService.findById(Integer.parseInt(studentId));
+            if (student != null){
+                name = student.getName();
+                age = String.valueOf(student.getAge());
+                group_id = String.valueOf(student.getGroupId());
+            }
+        }
+
+        req.setAttribute("name", name);
+        req.setAttribute("age", age);
+        req.setAttribute("group_id", group_id);
+
         req.getRequestDispatcher("/student.jsp").forward(req, resp);
     }
 
@@ -35,12 +52,18 @@ public class StudentServlet extends HttpServlet {
             String name = req.getParameter("name");
             int age = Integer.parseInt(req.getParameter("age"));
             long group_id = Long.parseLong(req.getParameter("group_id"));
+            String id = req.getParameter("student_id");
 
-            Student student = new Student();
-            student.setName(name);
-            student.setAge(age);
-            student.setGroupId(group_id);
-            studentService.insert(student);
+            if ((id == null) || ("null".equals(id))) {
+                Student student = new Student(name, age, group_id);
+                studentService.insert(student);
+            }else{
+                Student student = studentService.findById(Integer.parseInt(id));
+                student.setName(name);
+                student.setAge(age);
+                student.setGroupId(group_id);
+                studentService.update(student);
+            }
         }catch (Exception e){
             LOGGER.error(e);
         }

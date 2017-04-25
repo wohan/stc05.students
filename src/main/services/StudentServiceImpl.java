@@ -3,15 +3,33 @@ package main.services;
 import main.model.dao.StudentDao;
 import main.model.entity.Student;
 import main.model.impl.StudentDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Aleksei Lysov on 19.04.2017.
  */
+@Service
 public class StudentServiceImpl implements StudentService{
 
-    public static StudentDao studentDao = new StudentDaoImpl(DataSourceFactory.getDataSource());
+//    @Autowired
+//    public StudentServiceImpl(StudentDao studentDao) {
+//        this.studentDao = studentDao;
+//    }
+
+    public StudentDao getStudentDao() {
+        return studentDao;
+    }
+
+    @Autowired
+    public void setStudentDao(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
+
+    // @Autowired
+    private StudentDao studentDao;
 
     public List<Student> getAllStudents(){
         return studentDao.findAll();

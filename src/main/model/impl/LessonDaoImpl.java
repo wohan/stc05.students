@@ -2,21 +2,19 @@ package main.model.impl;
 
 import main.model.dao.LessonDao;
 import main.model.entity.Lesson;
+import main.services.DataSourceFactory;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class LessonDaoImpl implements LessonDao {
 
     private static final Logger LOG = Logger.getLogger(LessonDaoImpl.class);
-    private DataSource dataSource;
-
-    public LessonDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    private DataSource dataSource = DataSourceFactory.getDataSource();
 
     public List<Lesson> findAll() {
         List<Lesson> list = new ArrayList<>();
@@ -28,7 +26,7 @@ public class LessonDaoImpl implements LessonDao {
                 Lesson lesson = new Lesson();
                 lesson.setId(resultSet.getLong(1));
                 lesson.setGroupId(resultSet.getLong(2));
-                lesson.setGroup(new GroupDaoImpl(dataSource).findById(lesson.getGroupId()));
+                lesson.setGroup(new GroupDaoImpl().findById(lesson.getGroupId()));
                 lesson.setLessonDate(resultSet.getTimestamp(3));
                 lesson.setRoom(resultSet.getInt(4));
                 lesson.setDescription(resultSet.getString(5));
@@ -54,7 +52,7 @@ public class LessonDaoImpl implements LessonDao {
                 lesson = new Lesson();
                 lesson.setId(resultSet.getLong(1));
                 lesson.setGroupId(resultSet.getLong(2));
-                lesson.setGroup(new GroupDaoImpl(dataSource).findById(lesson.getGroupId()));
+                lesson.setGroup(new GroupDaoImpl().findById(lesson.getGroupId()));
                 lesson.setLessonDate(resultSet.getTimestamp(3));
                 lesson.setRoom(resultSet.getInt(4));
                 lesson.setDescription(resultSet.getString(5));

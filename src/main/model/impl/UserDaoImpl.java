@@ -3,6 +3,7 @@ package main.model.impl;
 import main.model.dao.UserDao;
 import main.model.entity.User;
 import main.services.DataSourceFactory;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 /**
  * Created by Aleksei Lysov on 20.04.2017.
  */
+@Repository
 public class UserDaoImpl implements UserDao{
 
 

@@ -2,21 +2,20 @@ package main.model.impl;
 
 import main.model.dao.JournalDao;
 import main.model.entity.Journal;
+import main.services.DataSourceFactory;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class JournalDaoImpl implements JournalDao {
 
     private static final Logger LOG = Logger.getLogger(JournalDaoImpl.class);
-    private DataSource dataSource;
-
-    public JournalDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    private static DataSource dataSource = DataSourceFactory.getDataSource();
 
     public List<Journal> findAll() {
         List<Journal> list = new ArrayList<>();
@@ -29,8 +28,8 @@ public class JournalDaoImpl implements JournalDao {
                 journal.setId(resultSet.getLong(1));
                 journal.setLessonId(resultSet.getLong(2));
                 journal.setStudentId(resultSet.getLong(3));
-                journal.setLesson(new LessonDaoImpl(dataSource).findById(journal.getLessonId()));
-                journal.setStudent(new StudentDaoImpl(dataSource).findById(journal.getStudentId()));
+                journal.setLesson(new LessonDaoImpl().findById(journal.getLessonId()));
+                journal.setStudent(new StudentDaoImpl().findById(journal.getStudentId()));
                 list.add(journal);
             }
             resultSet.close();
@@ -54,8 +53,8 @@ public class JournalDaoImpl implements JournalDao {
                 journal.setId(resultSet.getLong(1));
                 journal.setLessonId(resultSet.getLong(2));
                 journal.setStudentId(resultSet.getLong(3));
-                journal.setLesson(new LessonDaoImpl(dataSource).findById(journal.getLessonId()));
-                journal.setStudent(new StudentDaoImpl(dataSource).findById(journal.getStudentId()));
+                journal.setLesson(new LessonDaoImpl().findById(journal.getLessonId()));
+                journal.setStudent(new StudentDaoImpl().findById(journal.getStudentId()));
             }
             resultSet.close();
             preparedStatement.close();

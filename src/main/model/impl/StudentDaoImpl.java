@@ -2,21 +2,20 @@ package main.model.impl;
 
 import main.model.dao.StudentDao;
 import main.model.entity.Student;
+import main.services.DataSourceFactory;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class StudentDaoImpl implements StudentDao {
 
     private static final Logger LOG = Logger.getLogger(StudentDaoImpl.class);
-    private DataSource dataSource;
-
-    public StudentDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    private DataSource dataSource = DataSourceFactory.getDataSource();
 
     public List<Student> findAll() {
         List<Student> list = new ArrayList<>();
@@ -30,7 +29,7 @@ public class StudentDaoImpl implements StudentDao {
                 student.setName(resultSet.getString(2));
                 student.setAge(resultSet.getInt(3));
                 student.setGroupId(resultSet.getLong(4));
-                student.setGroup(new GroupDaoImpl(dataSource).findById(student.getGroupId()));
+                student.setGroup(new GroupDaoImpl().findById(student.getGroupId()));
                 list.add(student);
             }
             resultSet.close();
@@ -58,7 +57,7 @@ public class StudentDaoImpl implements StudentDao {
                 student.setName(resultSet.getString(2));
                 student.setAge(resultSet.getInt(3));
                 student.setGroupId(resultSet.getLong(4));
-                student.setGroup(new GroupDaoImpl(dataSource).findById(student.getGroupId()));
+                student.setGroup(new GroupDaoImpl().findById(student.getGroupId()));
             }
             resultSet.close();
             preparedStatement.close();

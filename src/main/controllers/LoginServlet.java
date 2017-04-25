@@ -5,7 +5,11 @@ import main.services.UserService;
 import main.services.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +21,8 @@ import java.io.IOException;
  */
 public class LoginServlet extends HttpServlet {
 
-
-
-    private static UserService userService = new UserServiceImpl();
+    @Autowired
+    private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(LoginServlet.class);
 
     @Override
@@ -44,5 +47,12 @@ public class LoginServlet extends HttpServlet {
 //            resp.sendRedirect(req.getContextPath() + "/listStudents");
 //        else
 //            resp.sendRedirect(req.getContextPath() + "/error");
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
     }
 }

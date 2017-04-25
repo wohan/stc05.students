@@ -27,10 +27,10 @@ public class Main {
     public static void main(String[] args) {
 
         DataSource dataSource = DataSourceFactory.getDataSource();//DataSourceFactory.getMyPGDataSource();
-        groupDao = new GroupDaoImpl(dataSource);
-        studentDao = new StudentDaoImpl(dataSource);
-        lessonDao = new LessonDaoImpl(dataSource);
-        journalDao = new JournalDaoImpl(dataSource);
+        groupDao = new GroupDaoImpl();
+        studentDao = new StudentDaoImpl();
+        lessonDao = new LessonDaoImpl();
+        journalDao = new JournalDaoImpl();
 
        for (Group group : groupDao.findAll()) {
            System.out.println(group);

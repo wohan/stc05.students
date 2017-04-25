@@ -62,6 +62,14 @@
   <listener>
     <listener-class>main.controllers.listeners.MyRequestListener</listener-class>
   </listener>
+  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>WEB-INF/beans.xml</param-value>
+  </context-param>
 
   <context-param>
     <param-name>ADMIN_EMAIL</param-name>

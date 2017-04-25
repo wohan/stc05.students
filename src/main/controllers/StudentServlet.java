@@ -8,7 +8,10 @@ import main.services.UserService;
 import main.services.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +23,17 @@ import java.io.IOException;
  */
 public class StudentServlet extends HttpServlet {
 
-    private static StudentService studentService = new StudentServiceImpl();
+    private StudentService studentService;
+
+    public StudentService getStudentService() {
+        return studentService;
+    }
+
+    @Autowired
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     private static final Logger LOGGER = Logger.getLogger(StudentServlet.class);
 
     @Override
@@ -70,5 +83,11 @@ public class StudentServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/listStudents");
     }
 
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+                config.getServletContext());
+    }
 
 }

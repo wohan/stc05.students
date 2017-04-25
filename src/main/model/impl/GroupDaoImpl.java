@@ -2,21 +2,21 @@ package main.model.impl;
 
 import main.model.dao.GroupDao;
 import main.model.entity.Group;
+import main.services.DataSourceFactory;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class GroupDaoImpl implements GroupDao {
 
     private static final Logger LOG = Logger.getLogger(GroupDaoImpl.class);
-    private DataSource dataSource;
-
-    public GroupDaoImpl(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    private DataSource dataSource = DataSourceFactory.getDataSource();
 
     public List<Group> findAll() {
         List<Group> list = new ArrayList<>();

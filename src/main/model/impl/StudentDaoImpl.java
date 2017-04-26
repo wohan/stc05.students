@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Repository("studentDao")
 public class StudentDaoImpl implements StudentDao {
 
     private static final Logger LOG = Logger.getLogger(StudentDaoImpl.class);
